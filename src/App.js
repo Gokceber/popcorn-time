@@ -6,20 +6,29 @@ import Main from "./components/Main"
 import Footer from "./components/Footer"
 
 import './App.css';
+import AddMovie from "./components/AddMovie";
 
 
 function App() {
 
   const [moviesToDisplay, setMoviesToDisplay] = useState(movies);
 
-  
-  const deleteMovie = (movieId) => {
-    console.log("deleting movie with id....", movieId)
 
-   //moviesToDisplay.push(); // NEVER MODIFY STATE DIRECTLY !
+  const createMovie = (newMovie) => {
+    // new list = an array with the new movie + all the movies we had before
+    const newList = [newMovie, ...moviesToDisplay];
+
+    // update state
+    setMoviesToDisplay(newList);
+  }
+
+  const deleteMovie = (movieTitle) => {
+    console.log("deleting movie with id....", movieTitle)
+
+    //moviesToDisplay.push(); // NEVER MODIFY STATE DIRECTLY !
 
     const newList = moviesToDisplay.filter((element) => {
-      return element.id !== movieId;
+      return element.title !== movieTitle;
     });
 
     setMoviesToDisplay(newList);
@@ -27,11 +36,10 @@ function App() {
   }
 
 
-
-  
   return (
     <div className="App">
       <Header numberOfMovies={moviesToDisplay.length} />
+      <AddMovie callbackToCreate={createMovie} />
       <Main listOfMovies={moviesToDisplay} callbackToDelete={deleteMovie} />
       <Footer />
     </div>
