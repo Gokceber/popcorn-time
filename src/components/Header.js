@@ -1,9 +1,21 @@
 import "./Header.css";
 
-function Header() {
+function Header(props) {
+    //Conditional Rendering: option A (Element Variables)
+    let message = "";
+    if(props.numberOfMovies > 0){
+        message = <h1>Number of movies: {props.numberOfMovies}</h1>;
+    } else {
+        message = <h1>Sorry, no movies to display</h1>;
+    }
+
+
+
+
     return (
         <div className="Header">
-            <h1>This is the Header</h1>
+            <h1>Popcorn Time 🍿 </h1>
+            {message}
         </div>
     );
 }
